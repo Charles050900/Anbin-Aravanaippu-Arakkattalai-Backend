@@ -1,24 +1,15 @@
 package org.anbin_aravaippu_arakkattali.Anbin.Aravanaippu.Arakkattalai.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 
-@Entity
+
 public class Message {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer messageId;
-	@Column(nullable = false)
-	private String contactPersonEmailId;
-	@Column(nullable = false)
-	private Long contactPersonPhoneNo;
-	@Column(nullable = false)
-	private String MessageContent;
 
-	
+	private Integer messageId;
+	private String senderName;
+	private String senderEmail;
+	private String senderPhoneNo;
+	private String senderMessage;
+	private String createdAt;
 
 	public Integer getMessageId() {
 		return messageId;
@@ -28,28 +19,43 @@ public class Message {
 		this.messageId = messageId;
 	}
 
-	public String getContactPersonEmailId() {
-		return contactPersonEmailId;
+	public String getSenderName() {
+		return senderName;
 	}
 
-	public void setContactPersonEmailId(String contactPersonEmailId) {
-		this.contactPersonEmailId = contactPersonEmailId;
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
 	}
 
-	public Long getContactPersonPhoneNo() {
-		return contactPersonPhoneNo;
+	public String getSenderEmail() {
+		return senderEmail;
+	}
+	public void setSenderEmail(String senderEmail) {
+		this.senderEmail = senderEmail;
 	}
 
-	public void setContactPersonPhoneNo(Long contactPersonPhoneNo) {
-		this.contactPersonPhoneNo = contactPersonPhoneNo;
+	public String getSenderPhoneNo() {
+		return senderPhoneNo;
 	}
 
-	public String getMessageContent() {
-		return MessageContent;
+	public void setSenderPhoneNo(String senderPhoneNo) {
+		this.senderPhoneNo = senderPhoneNo;
 	}
 
-	public void setMessageContent(String messageContent) {
-		MessageContent = messageContent;
+	public String getSenderMessage() {
+		return senderMessage;
 	}
+	public void setSenderMessage(String senderMessage) {
+		this.senderMessage = senderMessage;
+	}
+
+	public String getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
 
 }
