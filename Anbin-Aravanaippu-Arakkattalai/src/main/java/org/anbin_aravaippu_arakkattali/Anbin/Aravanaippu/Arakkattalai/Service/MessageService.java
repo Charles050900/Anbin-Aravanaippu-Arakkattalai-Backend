@@ -21,4 +21,13 @@ public class MessageService {
     public List<Message> getAllMessages() throws IOException {
         return repository.findAll();
     }
+
+     // Get last 5 messages (or all if less than 5)
+     public List<Message> getLastMessages() throws IOException {
+         return repository.findLastMessages();
+     }
+    public List<Message> getTodayMessages() throws IOException {
+    return repository.findTodayMessages();
+}
+
 }

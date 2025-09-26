@@ -33,4 +33,24 @@ public class MessageController {
     public List<Message> getAllMessages() throws IOException {
         return messageService.getAllMessages();
     }
+
+    @GetMapping("/last")
+    public List<Message> getLastMessages() {
+        try {
+            return messageService.getLastMessages();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+    @GetMapping("/today")
+public List<Message> getTodayMessages() {
+    try {
+        return messageService.getTodayMessages();
+    } catch (IOException e) {
+        e.printStackTrace();
+        return List.of();
+    }
+}
+
 }

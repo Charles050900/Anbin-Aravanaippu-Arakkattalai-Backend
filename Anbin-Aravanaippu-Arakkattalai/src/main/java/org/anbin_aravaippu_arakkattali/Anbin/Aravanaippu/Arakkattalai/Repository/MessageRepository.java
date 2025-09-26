@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.anbin_aravaippu_arakkattali.Anbin.Aravanaippu.Arakkattalai.entity.Message;
@@ -65,7 +67,8 @@ public class MessageRepository {
     public synchronized List<Message> findAll() throws IOException {
         List<Message> messages = new ArrayList<>();
         File file = new File(FILE_PATH);
-        if (!file.exists()) return messages;
+        if (!file.exists())
+            return messages;
 
         FileInputStream fis = new FileInputStream(file);
         Workbook workbook = new XSSFWorkbook(fis);
@@ -73,9 +76,10 @@ public class MessageRepository {
 
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row row = sheet.getRow(i);
-            if (row == null) continue;
+            if (row == null)
+                continue;
             Message msg = new Message();
-            msg.setMessageId ((int) row.getCell(0).getNumericCellValue());
+            msg.setMessageId((int) row.getCell(0).getNumericCellValue());
             msg.setSenderName(row.getCell(1).getStringCellValue());
             msg.setSenderEmail(row.getCell(2).getStringCellValue());
             msg.setSenderPhoneNo(row.getCell(3).getStringCellValue());
@@ -88,4 +92,73 @@ public class MessageRepository {
         fis.close();
         return messages;
     }
+
+    public synchronized List<Message> findLastMessages() throws IOException {
+        List<Message> messages = new ArrayList<>();
+        File file = new File(FILE_PATH);
+        if (!file.exists())
+            return messages;
+
+        FileInputStream fis = new FileInputStream(file);
+        Workbook workbook = new XSSFWorkbook(fis);
+        Sheet sheet = workbook.getSheetAt(0);
+
+        int totalRows = sheet.getLastRowNum(); // total rows excluding header
+        int startRow = Math.max(totalRows - 4, 1); // last 5 rows or all if less
+
+        for (int i = startRow; i <= totalRows; i++) {
+            Row row = sheet.getRow(i);
+            if (row == null)
+                continue;
+
+            Message msg = new Message();
+            msg.setMessageId((int) row.getCell(0).getNumericCellValue());
+            msg.setSenderName(row.getCell(1).getStringCellValue());
+            msg.setSenderEmail(row.getCell(2).getStringCellValue());
+            msg.setSenderPhoneNo(row.getCell(3).getStringCellValue());
+            msg.setSenderMessage(row.getCell(4).getStringCellValue());
+            msg.setCreatedAt(row.getCell(5).getStringCellValue());
+
+            messages.add(msg);
+        }
+
+        workbook.close();
+        fis.close();
+        return messages;
+    }
+public synchronized List<Message> findTodayMessages() throws IOException {
+    List<Message> messages = new ArrayList<>();
+    File file = new File(FILE_PATH);
+    if (!file.exists()) return messages;
+
+    FileInputStream fis = new FileInputStream(file);
+    Workbook workbook = new XSSFWorkbook(fis);
+    Sheet sheet = workbook.getSheetAt(0);
+
+    // Get today's date as string in dd-MM-yyyy
+    String today = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+
+    for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+        Row row = sheet.getRow(i);
+        if (row == null) continue;
+
+        String dateTime = row.getCell(5).getStringCellValue(); // "26-09-2025 19:00"
+        String datePart = dateTime.split(" ")[0]; // Get only "26-09-2025"
+
+        if (today.equals(datePart)) {
+            Message msg = new Message();
+            msg.setMessageId((int) row.getCell(0).getNumericCellValue());
+            msg.setSenderName(row.getCell(1).getStringCellValue());
+            msg.setSenderEmail(row.getCell(2).getStringCellValue());
+            msg.setSenderPhoneNo(row.getCell(3).getStringCellValue());
+            msg.setSenderMessage(row.getCell(4).getStringCellValue());
+            msg.setCreatedAt(dateTime);
+            messages.add(msg);
+        }
+    }
+
+    workbook.close();
+    fis.close();
+    return messages;
+}
 }
