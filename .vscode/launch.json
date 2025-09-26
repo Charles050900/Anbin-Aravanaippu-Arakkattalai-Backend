@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AnbinAravanaippuArakkattalaiApplication<Anbin-Aravanaippu-Arakkattalai>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "org.anbin_aravaippu_arakkattali.Anbin.Aravanaippu.Arakkattalai.AnbinAravanaippuArakkattalaiApplication",
+            "projectName": "Anbin-Aravanaippu-Arakkattalai",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
