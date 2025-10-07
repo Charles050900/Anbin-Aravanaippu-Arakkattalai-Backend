@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Integer> {
 
-	@Query(value = "select m from Message m order by m.messageId desc limit 5")
+	@Query(value = "select m from Message m order by m.messageId desc limit 5 ")
 	List<Message> findLastMessages();
 
 	@Query(value = "select m from Message m where m.createdAt like  ?1 ")
