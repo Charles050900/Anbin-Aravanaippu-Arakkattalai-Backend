@@ -1,9 +1,15 @@
 package org.anbin_aravaippu_arakkattali.Anbin.Aravanaippu.Arakkattalai.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-
+@Entity
 public class Message {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer messageId;
 	private String senderName;
 	private String senderEmail;
@@ -30,6 +36,7 @@ public class Message {
 	public String getSenderEmail() {
 		return senderEmail;
 	}
+
 	public void setSenderEmail(String senderEmail) {
 		this.senderEmail = senderEmail;
 	}
@@ -45,6 +52,7 @@ public class Message {
 	public String getSenderMessage() {
 		return senderMessage;
 	}
+
 	public void setSenderMessage(String senderMessage) {
 		this.senderMessage = senderMessage;
 	}
@@ -56,6 +64,5 @@ public class Message {
 	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
-
 
 }

@@ -1,6 +1,7 @@
 package org.anbin_aravaippu_arakkattali.Anbin.Aravanaippu.Arakkattalai.Controller;
 
-import java.io.IOException;
+
+import java.util.Date;
 import java.util.List;
 
 import org.anbin_aravaippu_arakkattali.Anbin.Aravanaippu.Arakkattalai.Service.MessageService;
@@ -15,42 +16,39 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/contact")
 @RestController
 public class MessageController {
-    @Autowired
-    private MessageService messageService;
+	@Autowired
+	private MessageService messageService;
 
-    @PostMapping("/submit")
-    public String submitMessage(@RequestBody Message message) {
-        try {
-            messageService.saveMessage(message);
-            return "Message saved successfully";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "Error saving message: " + e.getMessage();
-        }
-    }
+	@PostMapping("/submit")
+	public String submitMessage(@RequestBody Message message) {
 
-    @GetMapping("/all")
-    public List<Message> getAllMessages() throws IOException {
-        return messageService.getAllMessages();
-    }
+		messageService.saveMessage(message);
+		return "Message saved successfully";
 
-    @GetMapping("/last")
-    public List<Message> getLastMessages() {
-        try {
-            return messageService.getLastMessages();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return List.of();
-        }
-    }
-    @GetMapping("/today")
-public List<Message> getTodayMessages() {
-    try {
-        return messageService.getTodayMessages();
-    } catch (IOException e) {
-        e.printStackTrace();
-        return List.of();
-    }
-}
+	}
+
+	@GetMapping("/all")
+	public List<Message> getAllMessages() {
+		return messageService.getAllMessages();
+	}
+
+	@GetMapping("/last")
+	public List<Message> getLastMessages() {
+		return messageService.getLastMessages();
+
+	}
+
+	@SuppressWarnings("deprecation")
+	@GetMapping("/today")
+	public List<Message> getTodayMessages() {
+		Date todayDate = new Date();
+
+		StringBuilder sb = new StringBuilder();
+		sb.append( todayDate.getDate()).append("-");
+		sb.append( (todayDate.getMonth()+1)).append("-");
+		sb.append( (todayDate.getYear()-100+2000));
+
+		return messageService.getTodayMessages(sb.toString());
+	}
 
 }

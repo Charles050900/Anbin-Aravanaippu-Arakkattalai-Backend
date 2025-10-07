@@ -1,6 +1,5 @@
 package org.anbin_aravaippu_arakkattali.Anbin.Aravanaippu.Arakkattalai.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.anbin_aravaippu_arakkattali.Anbin.Aravanaippu.Arakkattalai.Repository.MessageRepository;
@@ -12,22 +11,23 @@ import org.springframework.stereotype.Service;
 public class MessageService {
 
 	@Autowired
-    private MessageRepository repository;
+	private MessageRepository messageRepository;
 
-    public void saveMessage(Message message) throws IOException {
-        repository.save(message);
-    }
+	public void saveMessage(Message message) {
 
-    public List<Message> getAllMessages() throws IOException {
-        return repository.findAll();
-    }
+		messageRepository.save(message);
+	}
 
-     // Get last 5 messages (or all if less than 5)
-     public List<Message> getLastMessages() throws IOException {
-         return repository.findLastMessages();
-     }
-    public List<Message> getTodayMessages() throws IOException {
-    return repository.findTodayMessages();
-}
+	public List<Message> getAllMessages() {
+		return messageRepository.findAll();
+	}
+
+	public List<Message> getLastMessages() {
+		return messageRepository.findLastMessages();
+	}
+
+	public List<Message> getTodayMessages(String date) {
+		return messageRepository.findTodayMessages("%" + date + "%");
+	}
 
 }
