@@ -1,0 +1,30 @@
+{
+  "defaults": {
+    "project": 1,
+    "env": 1
+  },
+  "actives": {
+    "project": 1,
+    "env": 1
+  },
+  "projects": [
+    {
+      "idx": 1,
+      "id": "21812000000010132",
+      "name": "Anbin-Aravanaippu-Arakkattalai",
+      "domain": {
+        "id": "50034004215",
+        "name": "anbin-aravanaippu-arakkattalai-60048547574.development"
+      },
+      "timezone": "Asia/Kolkata",
+      "env": [
+        {
+          "idx": 1,
+          "id": "60048547574",
+          "name": "Development",
+          "type": 3
+        }
+      ]
+    }
+  ]
+}
