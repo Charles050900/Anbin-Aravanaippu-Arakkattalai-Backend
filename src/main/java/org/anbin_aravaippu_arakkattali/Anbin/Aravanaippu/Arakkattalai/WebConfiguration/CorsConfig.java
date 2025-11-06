@@ -12,8 +12,8 @@ import org.springframework.lang.NonNull;
 public class CorsConfig {
 
     // Update with your deployed frontend URL
-    private static final String LOCAL_FRONTEND = "http://localhost:5173/Anbin-Aravanaippu-Arakkattalai/";
-    private static final String DEPLOYED_FRONTEND = "https://charles050900.github.io";
+    private static final String LOCAL_FRONTEND = "http://localhost:5173";
+    private static final String DEPLOYED_FRONTEND = "https://charles050900.github.io/Anbin-Aravanaippu-Arakkattalai/";
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
